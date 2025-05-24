@@ -39,16 +39,16 @@ public class S_Player2 : MonoBehaviour
 
             if (direction.magnitude > 0.01f)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                Quaternion targetRotation = Quaternion.LookRotation(-direction);
                 transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (collision.gameObject.CompareTag("Player1"))
+        if (hit.gameObject.CompareTag("Player1"))
         {
-            Debug.Log("Player1 collided with Player2 — loading next scene.");
+            Debug.Log("CharacterController collided with Player2");
 
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             int nextSceneIndex = currentSceneIndex + 1;
